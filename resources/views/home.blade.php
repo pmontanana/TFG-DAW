@@ -8,6 +8,7 @@
         <link rel="icon" href="{{ url('favicon.svg') }}">
 
         <!-- Fonts -->
+        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
@@ -24,20 +25,17 @@
     </head>
     <body class="h-full">
 
-
-    <x-header/>
+        <x-header/>
 
         <x-carousel/>
 
-        <x-cards></x-cards>
-
-
+        <x-cards/>
 
         <x-footer/>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 
     </body>
 </html>

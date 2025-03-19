@@ -45,8 +45,8 @@ Información sobre la licencia del proyecto.
 
 Información de contacto del autor o mantenedor del proyecto.
 
-- **Nombre:** Pablo Montañana
-- **Email:** pablomontanana@gmail.com
-- **GitHub:** [pmontanana](https://github.com/pmontanana)
+- Nombre: Pablo Montañana
+- Email: pablomontanana@gmail.com
+- GitHub: [pmontanana](https://github.com/pmontanana)
 
 ```

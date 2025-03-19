@@ -44,11 +44,7 @@
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <x-nav-link href="/" :active="request()->is('/')">Inicio</x-nav-link>
                         <x-nav-link href="/menus" :active="request()->is('menus')">Menus</x-nav-link>
-                        <x-dropdown>Platos
-                            <x-slot name="trigger">
-                                <x-nav-link href="#" :active="request()->is('pizzas') || request()->is('pasta') || request()->is('hamburguesas')">Platos</x-nav-link>
-                            </x-slot>
-                        </x-dropdown>
+                        <x-dropdown>Platos</x-dropdown>
                         <x-nav-link href="/contacto" :active="request()->is('contacto')">Contacto</x-nav-link>
                         <x-nav-link href="/register" :active="request()->is('register')">Registrate</x-nav-link>
                         <x-nav-link href="/login" :active="request()->is('login')">Inicia Sesion</x-nav-link>

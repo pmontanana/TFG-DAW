@@ -31,7 +31,7 @@
 
 <div class="flex justify-center pt-15 pb-25">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        @foreach($platos as $plato)
+        @foreach($platos->take(6) as $plato)
             <x-cards>
                 <x-slot name="title">{{ $plato->nombre }}</x-slot>
                 <x-slot name="description">{{ $plato->descripcion }}</x-slot>

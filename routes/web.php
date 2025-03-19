@@ -15,6 +15,12 @@ Route::get('/hamburguesas', [PlatosController::class, 'showHamburguesas'])->name
 Route::get('/pasta', [PlatosController::class, 'showPasta'])->name('platos.pasta');
 Route::get('/pizzas', [PlatosController::class, 'showPizzas'])->name('platos.pizzas');
 
+Route::get('/platos', function () {
+    return view('platosHome');
+});
+Route::get('/platos', [PlatosController::class, 'platosHome']);
+
+
 Route::get('/login', function () {
     return view('login');
 });

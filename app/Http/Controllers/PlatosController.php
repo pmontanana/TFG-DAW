@@ -109,4 +109,13 @@ class PlatosController extends Controller
         $platos = Platos::where('pizza', true)->get();
         return view('platosPizzas', compact('platos'));
     }
+
+    public function platosHome()
+    {
+        $hamburguesas = Platos::where('hamburguesa', true)->get();
+        $pizzas = Platos::where('pizza', true)->get();
+        $pasta = Platos::where('pasta', true)->get();
+
+        return view('platosHome', compact('hamburguesas', 'pizzas', 'pasta'));
+    }
 }

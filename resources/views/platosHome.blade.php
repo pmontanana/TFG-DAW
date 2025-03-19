@@ -27,53 +27,23 @@
 <x-header/>
 
 <main class="flex-grow mb-25">
-    <div class="ml-15 mr-15 bg-white rounded-lg shadow-md mt-10">
-        <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6">Hamburguesas</h1>
-        <div class="flex justify-center pt-15 pb-25">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                @foreach($hamburguesas as $plato)
-                    <x-cards>
-                        <x-slot name="title">{{ $plato->nombre }}</x-slot>
-                        <x-slot name="description">{{ $plato->descripcion }}</x-slot>
-                        <x-slot name="image">{{ $plato->imagen }}</x-slot>
-                        <x-slot name="precio">{{ $plato->precio }}</x-slot>
-                    </x-cards>
-                @endforeach
+    @foreach(['hamburguesa', 'pizza', 'pasta'] as $tipo)
+        <div class="ml-15 mr-15 bg-white rounded-lg shadow-md mt-10">
+            <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6">{{ ucfirst($tipo) }}</h1>
+            <div class="flex justify-center pt-15 pb-25">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    @foreach($$tipo as $plato)
+                        <x-cards>
+                            <x-slot name="title">{{ $plato->nombre }}</x-slot>
+                            <x-slot name="description">{{ $plato->descripcion }}</x-slot>
+                            <x-slot name="image">{{ $plato->imagen }}</x-slot>
+                            <x-slot name="precio">{{ $plato->precio }}</x-slot>
+                        </x-cards>
+                    @endforeach
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="ml-15 mr-15 bg-white rounded-lg shadow-md mt-10">
-        <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6">Pizzas</h1>
-        <div class="flex justify-center pt-15 pb-25">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                @foreach($pizzas as $plato)
-                    <x-cards>
-                        <x-slot name="title">{{ $plato->nombre }}</x-slot>
-                        <x-slot name="description">{{ $plato->descripcion }}</x-slot>
-                        <x-slot name="image">{{ $plato->imagen }}</x-slot>
-                        <x-slot name="precio">{{ $plato->precio }}</x-slot>
-                    </x-cards>
-                @endforeach
-            </div>
-        </div>
-    </div>
-
-    <div class="ml-15 mr-15 bg-white rounded-lg shadow-md mt-10">
-        <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6">Pasta</h1>
-        <div class="flex justify-center pt-15 pb-25">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                @foreach($pasta as $plato)
-                    <x-cards>
-                        <x-slot name="title">{{ $plato->nombre }}</x-slot>
-                        <x-slot name="description">{{ $plato->descripcion }}</x-slot>
-                        <x-slot name="image">{{ $plato->imagen }}</x-slot>
-                        <x-slot name="precio">{{ $plato->precio }}</x-slot>
-                    </x-cards>
-                @endforeach
-            </div>
-        </div>
-    </div>
+    @endforeach
 </main>
 
 <x-footer/>

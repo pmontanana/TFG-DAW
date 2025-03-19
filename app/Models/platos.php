@@ -11,8 +11,6 @@ class Platos extends Model
         'descripcion',
         'imagen',
         'precio',
-        'pizza',
-        'hamburguesa',
-        'pasta'
+        'tipo'
     ];
 }

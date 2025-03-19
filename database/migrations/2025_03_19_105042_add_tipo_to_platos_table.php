@@ -14,9 +14,7 @@ class AddTipoToPlatosTable extends Migration
     public function up()
     {
         Schema::table('platos', function (Blueprint $table) {
-            $table->boolean('pizza')->default(false);
-            $table->boolean('pasta')->default(false);
-            $table->boolean('hamburguesa')->default(false);
+            $table->text('tipo');
         });
     }
 

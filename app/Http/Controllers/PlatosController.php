@@ -33,13 +33,13 @@ class PlatosController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'imagen' => 'required|max:255',
-            'precio' => 'required|numeric|min:0',
+            'precio' => 'required|numeric|min:1',
+            'tipo' => 'required|string',
         ]);
 
         $data = $request->all();
-        $data['pizza'] = $request->tipo === 'pizza';
-        $data['pasta'] = $request->tipo === 'pasta';
-        $data['hamburguesa'] = $request->tipo === 'hamburguesa';
+        $data['tipo'] = $request->tipo;
+
 
         Platos::create($data);
 
@@ -94,28 +94,31 @@ class PlatosController extends Controller
 
     public function showHamburguesas()
     {
-        $platos = Platos::where('hamburguesa', true)->get();
+        $platos = Platos::where('tipo', "hamburguesa")->get();
         return view('platosHamb', compact('platos'));
     }
 
     public function showPasta()
     {
-        $platos = Platos::where('pasta', true)->get();
+        $platos = Platos::where('tipo', "pasta")->get();
         return view('platosPasta', compact('platos'));
     }
 
     public function showPizzas()
     {
-        $platos = Platos::where('pizza', true)->get();
+        $platos = Platos::where('tipo', "pizza")->get();
         return view('platosPizzas', compact('platos'));
     }
 
     public function platosHome()
     {
-        $hamburguesas = Platos::where('hamburguesa', true)->get();
-        $pizzas = Platos::where('pizza', true)->get();
-        $pasta = Platos::where('pasta', true)->get();
+        $tipos = ['hamburguesa', 'pizza', 'pasta'];
+        $data = [];
 
-        return view('platosHome', compact('hamburguesas', 'pizzas', 'pasta'));
+        foreach ($tipos as $tipo) {
+            $data[$tipo] = Platos::where('tipo', $tipo)->get();
+        }
+
+        return view('platosHome', $data);
     }
 }

@@ -5,11 +5,8 @@ Cafeteria CLM Skills. El proposito del proyecto es presentarlo como TFG del CFGS
 
 ## Índice
 
-- [Introducción](#introducción)
 - [Instalación](#instalación)
 - [Uso](#uso)
-- [Características](#características)
-- [Contribución](#contribución)
 - [Licencia](#licencia)
 - [Contacto](#contacto)
 

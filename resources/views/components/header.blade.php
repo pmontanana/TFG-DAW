@@ -6,19 +6,9 @@
                 <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset" aria-controls="mobile-menu" aria-expanded="false">
                     <span class="absolute -inset-0.5"></span>
                     <span class="sr-only">Open main menu</span>
-                    <!--
-                      Icon when menu is closed.
-
-                      Menu open: "hidden", Menu closed: "block"
-                    -->
                     <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
-                    <!--
-                      Icon when menu is open.
-
-                      Menu open: "block", Menu closed: "hidden"
-                    -->
                     <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
@@ -52,12 +42,16 @@
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <a href="#" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white" aria-current="page">Inicio</a>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Menus</a>
-                        <x-dropdown>Platos</x-dropdown>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contacto</a>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Registrate</a>
-                        <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Inicia Sesión</a>
+                        <x-nav-link href="/" :active="request()->is('/')">Inicio</x-nav-link>
+                        <x-nav-link href="/menus" :active="request()->is('menus')">Menus</x-nav-link>
+                        <x-dropdown>Platos
+                            <x-slot name="trigger">
+                                <x-nav-link href="#" :active="request()->is('pizzas') || request()->is('pasta') || request()->is('hamburguesas')">Platos</x-nav-link>
+                            </x-slot>
+                        </x-dropdown>
+                        <x-nav-link href="/contacto" :active="request()->is('contacto')">Contacto</x-nav-link>
+                        <x-nav-link href="/register" :active="request()->is('register')">Registrate</x-nav-link>
+                        <x-nav-link href="/login" :active="request()->is('login')">Inicia Sesion</x-nav-link>
                         <button type="button" class="inline-flex items-center rounded-md bg-gray-300 px-3 py-2 text-sm font-semibold text-black shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-300">
                             Reservar una Mesa
                         </button>

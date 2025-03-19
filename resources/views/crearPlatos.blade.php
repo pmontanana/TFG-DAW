@@ -61,6 +61,15 @@
             <input type="number" id="precio" name="precio" step="0.01" value="{{ old('precio') }}" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
         </div>
 
+        <div class="mb-4">
+            <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo de Plato:</label>
+            <select id="tipo" name="tipo" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <option value="pizza">Pizza</option>
+                <option value="pasta">Pasta</option>
+                <option value="hamburguesa">Hamburguesa</option>
+            </select>
+        </div>
+
         <button type="submit" class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Add Plato</button>
     </form>
 </div>

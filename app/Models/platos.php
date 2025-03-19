@@ -10,6 +10,9 @@ class Platos extends Model
         'nombre',
         'descripcion',
         'imagen',
-        'precio'
+        'precio',
+        'pizza',
+        'hamburguesa',
+        'pasta'
     ];
 }

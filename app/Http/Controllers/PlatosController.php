@@ -36,7 +36,12 @@ class PlatosController extends Controller
             'precio' => 'required|numeric|min:0',
         ]);
 
-        Platos::create($request->all());
+        $data = $request->all();
+        $data['pizza'] = $request->tipo === 'pizza';
+        $data['pasta'] = $request->tipo === 'pasta';
+        $data['hamburguesa'] = $request->tipo === 'hamburguesa';
+
+        Platos::create($data);
 
         return redirect()->route('platos.index')
             ->with('success', 'Plato creado exitosamente.');
@@ -85,5 +90,23 @@ class PlatosController extends Controller
 
         return redirect()->route('platos.index')
             ->with('success', 'Plato eliminado exitosamente.');
+    }
+
+    public function showHamburguesas()
+    {
+        $platos = Platos::where('hamburguesa', true)->get();
+        return view('platosHamb', compact('platos'));
+    }
+
+    public function showPasta()
+    {
+        $platos = Platos::where('pasta', true)->get();
+        return view('platosPasta', compact('platos'));
+    }
+
+    public function showPizzas()
+    {
+        $platos = Platos::where('pizza', true)->get();
+        return view('platosPizzas', compact('platos'));
     }
 }

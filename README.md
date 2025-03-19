@@ -16,7 +16,7 @@ Cafeteria CLM Skills. El proposito del proyecto es presentarlo como TFG del CFGS
 ## Instalación
 
 Instrucciones paso a paso para instalar y configurar el proyecto localmente.
-
+```
 ```bash
 # Clonar el repositorio
 git clone https://github.com/pmontanana/TFG-DAW.git
@@ -27,15 +27,16 @@ cd TFG-DAW
 # Instalar dependencias (ejemplo usando npm)
 npm install
 ```
-
+```markdown
 ## Uso
 
 Para arrancar el proyecto utilizar el siguiente comando:
 
+```
 ```bash
 composer run dev
 ```
-
+```markdown
 ## Licencia
 
 Información sobre la licencia del proyecto.

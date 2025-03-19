@@ -26,7 +26,7 @@ class AddTipoToPlatosTable extends Migration
     public function down()
     {
         Schema::table('platos', function (Blueprint $table) {
-            $table->dropColumn(['pizza', 'pasta', 'hamburguesa']);
+            $table->dropColumn(['tipo']);
         });
     }
 }

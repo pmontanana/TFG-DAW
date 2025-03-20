@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PlatoPorCorreo;
 use App\Models\platos;
+use Faker\Provider\Address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Spatie\LaravelPdf\Facades\Pdf;
+
 
 class PlatosController extends Controller
 {
@@ -12,7 +17,7 @@ class PlatosController extends Controller
      */
     public function index()
     {
-        $platos = platos::all();
+        $platos = Platos::paginate(6);
         return view('home', compact('platos'));
     }
 
@@ -45,14 +50,6 @@ class PlatosController extends Controller
 
         return redirect()->route('platos.index')
             ->with('success', 'Plato creado exitosamente.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Platos $platos)
-    {
-        return view('platos.show', compact('platos'));
     }
 
     /**
@@ -120,5 +117,25 @@ class PlatosController extends Controller
         }
 
         return view('platosHome', $data);
+    }
+
+    public function generarPDF()
+    {
+        $platos = Platos::all();
+        $pdfPath = storage_path('app/public/platos.pdf');
+
+        if (!file_exists(dirname($pdfPath))) {
+            mkdir(dirname($pdfPath), 0755, true);
+        }
+
+        Pdf::view('PDFPlatos', compact('platos'))->save($pdfPath);
+
+        return response()->download($pdfPath);
+    }
+
+    public function platosPorCorreo(){
+        $platos = Platos::all();
+        Mail::to('pablomontanana@gmail.com')->send(new PlatoPorCorreo($platos));
+        return redirect('/');
     }
 }

@@ -27,6 +27,9 @@
 <x-header/>
 
 <main class="flex-grow mb-25">
+    <button name="correo" class="inline-flex items-center rounded-md bg-blue-300 px-3 py-2 text-sm font-semibold text-black shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-300" type="button">
+        <a href="/platos/correo">Enviar platos por correo</a>
+    </button>
     @foreach(['hamburguesa', 'pizza', 'pasta'] as $tipo)
         <div class="ml-15 mr-15 bg-white rounded-lg shadow-md mt-10">
             <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">{{ ucfirst($tipo) }}</h1>

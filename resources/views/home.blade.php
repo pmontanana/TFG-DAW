@@ -31,10 +31,10 @@
 
 <x-carousel/>
 <div class="flex-grow ml-15 mr-15 bg-white rounded-lg shadow-md mt-15 m-25">
-    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Platos mas nuevos  </h1>
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Platos mas nuevos</h1>
     <div class="flex justify-center pt-15 pb-25">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            @foreach($platos->take(6) as $plato)
+            @foreach($platos as $plato)
                 <x-cards>
                     <x-slot name="title">{{ $plato->nombre }}</x-slot>
                     <x-slot name="description">{{ $plato->descripcion }}</x-slot>
@@ -44,8 +44,16 @@
             @endforeach
         </div>
     </div>
+    <div class="flex justify-center mt-4">
+        {{ $platos->links() }}
+    </div>
+    <button name="correo" class="inline-flex items-center rounded-md bg-blue-300 px-3 py-2 text-sm font-semibold text-black shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-300" type="button">
+        <a href="/platos/pdf">Generar pdf de platos</a>
+    </button>
 </div>
 <br>
+
+
 <x-footer/>
 
 <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>

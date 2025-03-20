@@ -29,7 +29,7 @@
 <main class="flex-grow mb-25">
     @foreach(['hamburguesa', 'pizza', 'pasta'] as $tipo)
         <div class="ml-15 mr-15 bg-white rounded-lg shadow-md mt-10">
-            <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6">{{ ucfirst($tipo) }}</h1>
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">{{ ucfirst($tipo) }}</h1>
             <div class="flex justify-center pt-15 pb-25">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     @foreach($$tipo as $plato)

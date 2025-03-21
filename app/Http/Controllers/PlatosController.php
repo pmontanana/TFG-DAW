@@ -7,6 +7,7 @@ use App\Models\Platos;
 use Faker\Provider\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Spatie\LaravelPdf\Facades\Pdf;
 
 
@@ -123,11 +124,8 @@ class PlatosController extends Controller
     {
         $platos = Platos::all();
 
-        return Pdf::view('PDFPlatos', compact('platos'))
-            ->withBrowsershot(function ($browsershot) {
-
-            })
-            ->download('platos.pdf');
+        $pdf = Pdf::loadView('PDFPlatos', compact('platos'));
+        return $pdf->download('platos.pdf');
     }
 
     public function platosPorCorreo(){

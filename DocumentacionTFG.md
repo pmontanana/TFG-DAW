@@ -50,6 +50,12 @@ Representa un plato con los siguientes atributos:
 - `precio`: Precio
 - `tipo`: Tipo de plato (hamburguesa, pasta, pizza)
 
+#### Usuarios
+Representa un plato con los siguientes atributos:
+- `nombre`: Nombre del usuario
+- `email`: Email del usuario
+- `contraseña `: Contraseña del usuario
+
 ## Funcionalidades
 
 ### Autenticación de Usuario

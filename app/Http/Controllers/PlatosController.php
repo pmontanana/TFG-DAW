@@ -122,15 +122,12 @@ class PlatosController extends Controller
     public function generarPDF()
     {
         $platos = Platos::all();
-        $pdfPath = storage_path('app/public/platos.pdf');
 
-        if (!file_exists(dirname($pdfPath))) {
-            mkdir(dirname($pdfPath), 0755, true);
-        }
+        return Pdf::view('PDFPlatos', compact('platos'))
+            ->withBrowsershot(function ($browsershot) {
 
-        Pdf::view('PDFPlatos', compact('platos'))->save($pdfPath);
-
-        return response()->download($pdfPath);
+            })
+            ->download('platos.pdf');
     }
 
     public function platosPorCorreo(){

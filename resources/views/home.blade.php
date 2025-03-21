@@ -20,8 +20,6 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
         <style>
-            /*! tailwindcss v4.0.7 | MIT License | https://tailwindcss.com */
-            /* Tailwind CSS styles here */
         </style>
     @endif
 </head>

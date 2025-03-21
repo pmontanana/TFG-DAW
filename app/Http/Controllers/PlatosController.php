@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\PlatoPorCorreo;
-use App\Models\platos;
+use App\Models\Platos;
 use Faker\Provider\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;

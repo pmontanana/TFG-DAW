@@ -8,7 +8,6 @@ use Faker\Provider\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Spatie\LaravelPdf\Facades\Pdf;
 
 
 class PlatosController extends Controller

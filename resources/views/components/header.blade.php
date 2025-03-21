@@ -1,3 +1,4 @@
+<!-- resources/views/components/header.blade.php -->
 <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
@@ -14,7 +15,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="flex flex-1 items-center justify-center sm:justify-center">
+            <div class="flex flex-1 items-center justify-between sm:justify-between">
                 <div class="flex flex-col items-center sm:items-start">
                     <div class="flex items-center">
                         <h2 class="text-white text-base font-bold">Cafeteria CLMSkills 2025</h2>

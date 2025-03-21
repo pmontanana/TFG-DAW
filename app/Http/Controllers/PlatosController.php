@@ -129,7 +129,7 @@ class PlatosController extends Controller
 
     public function platosPorCorreo(){
         $platos = Platos::all();
-        Mail::to('pablomontanana@gmail.com')->send(new PlatoPorCorreo($platos));
+        Mail::to('jorgejuanlopeznavarro@gmail.com')->send(new PlatoPorCorreo($platos));
         return redirect('/');
     }
 }

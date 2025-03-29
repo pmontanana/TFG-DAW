@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlatosController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ContactoController;
 use App\Models\Platos;
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -30,3 +31,5 @@ Route::get('/pasta', [PlatosController::class, 'showPasta'])->name('platos.pasta
 Route::get('/pizzas', [PlatosController::class, 'showPizzas'])->name('platos.pizzas');
 
 Route::get('/platos', [PlatosController::class, 'platosHome'])->name('platos.index');
+
+Route::resource('/contacto', ContactoController::class);

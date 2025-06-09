@@ -5,7 +5,9 @@ use App\Http\Controllers\PlatosController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\MenuController;
 use App\Models\Platos;
+
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
@@ -17,7 +19,6 @@ Route::get('register', [RegisterController::class, 'showRegistrationForm'])->nam
 Route::post('register', [RegisterController::class, 'register']);
 
 Route::resource('platos', PlatosController::class)->except(['show']);
-Route::get('/platos/pdf', [PlatosController::class, 'generarPDF'])->name('platos.PDFPlatos');
 
 Route::get('/', function () {
     $platos = Platos::paginate(6);
@@ -30,6 +31,8 @@ Route::get('/hamburguesas', [PlatosController::class, 'showHamburguesas'])->name
 Route::get('/pasta', [PlatosController::class, 'showPasta'])->name('platos.pasta');
 Route::get('/pizzas', [PlatosController::class, 'showPizzas'])->name('platos.pizzas');
 
-Route::get('/platos', [PlatosController::class, 'platosHome'])->name('platos.index');
-
+Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
+Route::resource('menus', MenuController::class)
+    ->only(['create', 'store'])
+    ->middleware('auth');
 Route::resource('/contacto', ContactoController::class);

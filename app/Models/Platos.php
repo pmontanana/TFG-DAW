@@ -13,4 +13,9 @@ class Platos extends Model
         'precio',
         'tipo'
     ];
+
+    public function menus()
+    {
+        return $this->belongsToMany(Menu::class, 'menu_plato', 'platos_id', 'menu_id');
+    }
 }

@@ -119,14 +119,6 @@ class PlatosController extends Controller
         return view('platosHome', $data);
     }
 
-    public function generarPDF()
-    {
-        $platos = Platos::all();
-
-        $pdf = Pdf::loadView('PDFPlatos', compact('platos'));
-        return $pdf->download('platos.pdf');
-    }
-
     public function platosPorCorreo(){
         $platos = Platos::all();
         Mail::to('jorgejuanlopeznavarro@gmail.com')->send(new PlatoPorCorreo($platos));

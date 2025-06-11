@@ -17,41 +17,47 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
         <style>
-            /*! tailwindcss v4.0.7 | MIT License | https://tailwindcss.com */
-            /* Tailwind CSS styles here */
         </style>
     @endif
 </head>
-<body class="bg-gray-100 flex flex-col min-h-screen">
+<body class="bg-gray-100 flex flex-col min-h-screen" x-data>
 
 <x-header/>
 
 <main class="flex-grow mb-25">
-    <button name="correo" class="inline-flex items-center rounded-md bg-blue-300 px-3 py-2 text-sm font-semibold text-black shadow-xs hover:bg-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-300" type="button">
-        <a href="/platos/correo">Enviar platos por correo</a>
-    </button>
-    @foreach(['hamburguesa', 'pizza', 'pasta'] as $tipo)
-        <div class="ml-15 mr-15 bg-white rounded-lg shadow-md mt-10">
-            <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">{{ ucfirst($tipo) }}</h1>
-            <div class="flex justify-center pt-15 pb-25">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    @foreach($$tipo as $plato)
-                        <x-cards>
-                            <x-slot name="title">{{ $plato->nombre }}</x-slot>
-                            <x-slot name="description">{{ $plato->descripcion }}</x-slot>
-                            <x-slot name="image">{{ $plato->imagen }}</x-slot>
-                            <x-slot name="precio">{{ $plato->precio }}</x-slot>
-                        </x-cards>
-                    @endforeach
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <button name="correo" class="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" type="button">
+            <a href="/platos/correo">Enviar platos por correo</a>
+        </button>
+
+        @foreach(['hamburguesa', 'pizza', 'pasta'] as $tipo)
+            <div class="bg-white rounded-lg shadow-md mt-10 p-6">
+                <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">{{ ucfirst($tipo) }}s</h1>
+                <div class="flex justify-center">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        @foreach($$tipo as $plato)
+                            <x-cards :plato="$plato" />
+                        @endforeach
+                    </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
 </main>
 
 <x-footer/>
 
+<x-modal-success
+    title="Producto añadido"
+    message="El producto se ha añadido correctamente al carrito" />
+
 <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+<script>
+    window.addEventListener('add-to-cart', (event) => {
+        console.log('Producto añadido:', event.detail);
+        window.dispatchEvent(new CustomEvent('open-modal', { detail: { id: 'success-modal' } }));
+    });
+</script>
 
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Crear Plato</title>
+    <title>Editar Plato</title>
     <link rel="icon" href="{{ url('favicon.svg') }}">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,7 +18,18 @@
 <x-header/>
 
 <div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
-    <h1 class="text-2xl font-bold mb-6">Añadir Nuevo Plato</h1>
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Editar Plato</h1>
+        <form action="{{ route('platos.destroy', $plato) }}" method="POST"
+              onsubmit="return confirm('¿Estás seguro de que quieres eliminar este plato?');">
+            @csrf
+            @method('DELETE')
+            <button type="submit"
+                    class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                Eliminar Plato
+            </button>
+        </form>
+    </div>
 
     @if ($errors->any())
         <div class="mb-4 p-4 bg-red-100 text-red-700 rounded-lg">
@@ -30,17 +41,17 @@
         </div>
     @endif
 
-    <form action="{{ route('platos.store') }}" method="POST"
+    <form action="{{ route('platos.update', $plato) }}" method="POST"
           x-data="{
-              nombre: '',
-              precio: '',
-              tipo: '',
+              nombre: '{{ $plato->nombre }}',
+              precio: '{{ $plato->precio }}',
               validations: {
-                  nombre: { valid: null, message: '' },
-                  precio: { valid: null, message: '' }
+                  nombre: { valid: true, message: '' },
+                  precio: { valid: true, message: '' }
               }
           }">
         @csrf
+        @method('PUT')
 
         <div class="mb-4">
             <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre:</label>
@@ -56,7 +67,7 @@
                        }
                    "
                    :class="validations.nombre.valid === false ? 'border-red-500' : (validations.nombre.valid === true ? 'border-green-500' : '')"
-                   value="{{ old('nombre') }}"
+                   value="{{ old('nombre', $plato->nombre) }}"
                    required
                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
             <p x-show="validations.nombre.valid === false"
@@ -69,7 +80,7 @@
             <textarea id="descripcion"
                       name="descripcion"
                       required
-                      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">{{ old('descripcion') }}</textarea>
+                      class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">{{ old('descripcion', $plato->descripcion) }}</textarea>
         </div>
 
         <div class="mb-4">
@@ -77,7 +88,7 @@
             <input type="text"
                    id="imagen"
                    name="imagen"
-                   value="{{ old('imagen') }}"
+                   value="{{ old('imagen', $plato->imagen) }}"
                    required
                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
         </div>
@@ -97,7 +108,7 @@
                    "
                    :class="validations.precio.valid === false ? 'border-red-500' : (validations.precio.valid === true ? 'border-green-500' : '')"
                    step="0.01"
-                   value="{{ old('precio') }}"
+                   value="{{ old('precio', $plato->precio) }}"
                    required
                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
             <p x-show="validations.precio.valid === false"
@@ -109,12 +120,10 @@
             <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo de Plato:</label>
             <select id="tipo"
                     name="tipo"
-                    x-model="tipo"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                <option value="">Selecciona un tipo</option>
-                <option value="pizza">Pizza</option>
-                <option value="pasta">Pasta</option>
-                <option value="hamburguesa">Hamburguesa</option>
+                <option value="pizza" {{ $plato->tipo == 'pizza' ? 'selected' : '' }}>Pizza</option>
+                <option value="pasta" {{ $plato->tipo == 'pasta' ? 'selected' : '' }}>Pasta</option>
+                <option value="hamburguesa" {{ $plato->tipo == 'hamburguesa' ? 'selected' : '' }}>Hamburguesa</option>
             </select>
         </div>
 
@@ -124,9 +133,8 @@
                     name="categoria_id"
                     required
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                <option value="">Selecciona una categoría</option>
                 @foreach($categorias as $categoria)
-                    <option value="{{ $categoria->id }}" {{ old('categoria_id') == $categoria->id ? 'selected' : '' }}>
+                    <option value="{{ $categoria->id }}" {{ $plato->categoria_id == $categoria->id ? 'selected' : '' }}>
                         {{ $categoria->nombre }}
                     </option>
                 @endforeach
@@ -138,7 +146,7 @@
                 <input type="checkbox"
                        name="forsale"
                        value="1"
-                       {{ old('forsale') ? 'checked' : '' }}
+                       {{ $plato->forsale ? 'checked' : '' }}
                        class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                 <span class="ml-2 text-sm text-gray-700">Disponible para llevar</span>
             </label>
@@ -152,7 +160,7 @@
                         <input type="checkbox"
                                name="alergenos[]"
                                value="{{ $alergeno->id }}"
-                               {{ in_array($alergeno->id, old('alergenos', [])) ? 'checked' : '' }}
+                               {{ $plato->alergenos->contains($alergeno->id) ? 'checked' : '' }}
                                class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
                         <span class="ml-2 text-sm">{{ $alergeno->nombre }}</span>
                     </label>
@@ -160,10 +168,16 @@
             </div>
         </div>
 
-        <button type="submit"
-                class="w-full px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-            Añadir Plato
-        </button>
+        <div class="flex space-x-3">
+            <button type="submit"
+                    class="flex-1 px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                Actualizar Plato
+            </button>
+            <a href="{{ route('platos.index') }}"
+               class="flex-1 px-4 py-2 bg-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 text-center">
+                Cancelar
+            </a>
+        </div>
     </form>
 </div>
 

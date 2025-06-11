@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="bg-gray-300">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-gray-300">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,11 +20,11 @@
         </style>
     @endif
 </head>
-<body class="bg-gray-100 flex flex-col min-h-screen" x-data>
+<body class="h-full flex flex-col" x-data>
 
 <x-header/>
 
-<main class="flex-grow mb-25">
+<main class="flex-grow">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <button name="correo" class="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" type="button">
             <a href="/platos/correo">Enviar platos por correo</a>

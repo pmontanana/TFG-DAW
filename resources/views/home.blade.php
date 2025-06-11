@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-gray-300">
 <head>
     <meta charset="utf-8">
@@ -23,42 +23,44 @@
         </style>
     @endif
 </head>
-<body class="h-full" x-data>
+<body class="h-full flex flex-col" x-data>
 
 <x-header/>
 
 <x-carousel/>
 
-@if(session('mensaje'))
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-            <span class="block sm:inline">{{ session('mensaje') }}</span>
+<!-- Main content wrapper con flex-grow para ocupar todo el espacio disponible -->
+<main class="flex-grow">
+    @if(session('mensaje'))
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{ session('mensaje') }}</span>
+            </div>
         </div>
-    </div>
-@endif
+    @endif
 
-@if(session('success'))
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-            <span class="block sm:inline">{{ session('success') }}</span>
+    @if(session('success'))
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
         </div>
-    </div>
-@endif
+    @endif
 
-<div class="flex-grow ml-15 mr-15 bg-white rounded-lg shadow-md mt-15 m-25">
-    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Platos más nuevos</h1>
-    <div class="flex justify-center pt-15 pb-25">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            @foreach($platos as $plato)
-                <x-cards :plato="$plato" />
-            @endforeach
+    <div class="mx-4 sm:mx-8 lg:mx-16 bg-white rounded-lg shadow-md mt-8 mb-8">
+        <h1 class="text-3xl font-bold text-center text-gray-800 pt-6 mb-6">Platos más nuevos</h1>
+        <div class="flex justify-center px-4 pb-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                @foreach($platos as $plato)
+                    <x-cards :plato="$plato" />
+                @endforeach
+            </div>
+        </div>
+        <div class="flex justify-center pb-6">
+            {{ $platos->links() }}
         </div>
     </div>
-    <div class="flex justify-center mt-4">
-        {{ $platos->links() }}
-    </div>
-</div>
-<br>
+</main>
 
 <x-footer/>
 
@@ -70,12 +72,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 <script>
-    // Escuchar evento de añadir al carrito
     window.addEventListener('add-to-cart', (event) => {
-        // Aquí se implementaría la lógica del carrito
         console.log('Producto añadido:', event.detail);
-
-        // Mostrar modal de éxito
         window.dispatchEvent(new CustomEvent('open-modal', { detail: { id: 'success-modal' } }));
     });
 </script>

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class ContactoController extends Controller
 {
-    //Muestra el formulario de contacto
     public function index()
     {
         return view('contacto');

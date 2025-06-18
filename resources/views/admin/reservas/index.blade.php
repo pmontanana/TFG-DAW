@@ -1,4 +1,3 @@
-{{-- resources/views/admin/reservas/index.blade.php --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-gray-100">
 <head>

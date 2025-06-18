@@ -44,7 +44,6 @@ class ReservaController extends Controller
             'observaciones' => 'nullable|string|max:500'
         ]);
 
-        // Verificar disponibilidad
         $existe = Reserva::where('mesa_id', $request->mesa_id)
             ->where('turno_id', $request->turno_id)
             ->where('fecha', $request->fecha)
